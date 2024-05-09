@@ -29,7 +29,7 @@ const Login = () => {
             DataService.post("login", values)
                 .then(({ data }) => {
                     if (data.status === 200) {
-                        dispatch(login({ token: data.token }));
+                        dispatch(login({ token: data.data }));
                         toast.success(data.message);
                     }
                     navigate('/products');

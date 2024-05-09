@@ -11,6 +11,21 @@ const Cart = () => {
     const cart = useSelector((state: any) => state.user.cart);
     console.log(cart, "maulik12")
 
+    const confirmOrder = () => {
+        const totalCartValue = cart.reduce((total, product) => {
+            return total + (product.price * product.qty);
+        }, 0);
+
+        DataService.post('confirm-order', {
+            payload: cart.map((e: any) => ({ productId: e._id, quantity: e.qty })),
+            totalPrice: totalCartValue
+        }).then(() => {
+            alert("order created")
+        }).catch(() => {
+
+        })
+    }
+
     return (
         <>
             <h1>Cart</h1>
@@ -43,7 +58,10 @@ const Cart = () => {
 
 
                         </Grid>
-                        <Button>Confirm Order</Button>
+                        <h6>Total: {cart?.reduce((total, product) => {
+                            return total + (product.price * product.qty);
+                        }, 0)}</h6>
+                        <Button onClick={() => confirmOrder()}>Confirm Order</Button>
                     </> : "No cart data"}
 
 
