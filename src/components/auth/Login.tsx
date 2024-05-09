@@ -32,7 +32,7 @@ const Login = () => {
                         dispatch(login({ token: data.token }));
                         toast.success(data.message);
                     }
-                    navigate('/dashboard');
+                    navigate('/products');
                 })
                 .catch((error: any) => {
                     toast.error(error?.response?.data?.message);
